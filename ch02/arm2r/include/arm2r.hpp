@@ -15,4 +15,10 @@ struct Config2R {
 };
 
 double cspaceDist(const Config2R &q1, const Config2R &q2);
+
+struct Vec2 {
+  double x, y;
+};
+
+Vec2 fk2R(const Config2R &q, double L1, double L2); // namespace arm2r
 } // namespace arm2r
