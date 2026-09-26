@@ -1,4 +1,6 @@
-#ifndef ARM2R_HPP
-#define ARM2R_HPP
+#pragma once
 
-#endif // ARM2R_HPP
+namespace arm2r {
+constexpr double kPi = 3.14159265358979323846;
+double wrapToPi(double a);
+} // namespace arm2r
