@@ -4,6 +4,8 @@
 #include <cstdio>
 
 using arm2r::angDist;
+using arm2r::Config2R;
+using arm2r::cspaceDist;
 using arm2r::kPi;
 using arm2r::wrapToPi;
 
@@ -22,14 +24,20 @@ int main() {
   assert(approxEq(wrapToPi(7.0), 7.0 - 2 * kPi));
 
   // angDist
-  assert(approxEq(angDist(0.0, 0.0), 0.0));                 // same angle
-  assert(approxEq(angDist(kPi - 0.01, -kPi + 0.01), 0.02)); // across the seam
-  assert(approxEq(angDist(0.0, kPi / 2), kPi / 2));         // quarter turn
-  assert(approxEq(angDist(kPi / 2, 0.0), kPi / 2));         // symmetric
-  assert(approxEq(angDist(0.0, kPi), kPi));                 // maximum distance
-  assert(approxEq(angDist(0.0, 2 * kPi), 0.0)); // full turn = same angle
-  assert(approxEq(angDist(-3 * kPi / 4, 3 * kPi / 4),
-                  kPi / 2)); // seam, negative side
+  assert(approxEq(angDist(0.0, 0.0), 0.0));
+  assert(approxEq(angDist(kPi - 0.01, -kPi + 0.01), 0.02));
+  assert(approxEq(angDist(0.0, kPi / 2), kPi / 2));
+  assert(approxEq(angDist(kPi / 2, 0.0), kPi / 2));
+  assert(approxEq(angDist(0.0, kPi), kPi));
+  assert(approxEq(angDist(0.0, 2 * kPi), 0.0));
+  assert(approxEq(angDist(-3 * kPi / 4, 3 * kPi / 4), kPi / 2));
+
+  // cspaceDist
+  assert(approxEq(cspaceDist(Config2R{0, 0}, Config2R{0, 0}), 0.0));
+  assert(approxEq(cspaceDist(Config2R{0, 0}, Config2R{0.3, 0.4}), 0.5));
+  assert(approxEq(cspaceDist(Config2R{0.3, 0.4}, Config2R{0, 0}), 0.5));
+  assert(approxEq(cspaceDist(Config2R{kPi - 0.01, 0}, Config2R{-kPi + 0.01, 0}), 0.02));
+  assert(approxEq(cspaceDist(Config2R{kPi - 0.01, kPi - 0.01}, Config2R{-kPi + 0.01, -kPi + 0.01}), 0.02 * std::sqrt(2.0)));
 
   std::puts("all tests passed");
   return 0;

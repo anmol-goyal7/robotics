@@ -9,4 +9,10 @@ double wrapToPi(double a);
 // Shortest distance between angles a and b (radians) on the circle. Result in
 // [0, pi].
 double angDist(double a, double b);
+
+struct Config2R {
+  double th1, th2;
+};
+
+double cspaceDist(const Config2R &q1, const Config2R &q2);
 } // namespace arm2r
