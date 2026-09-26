@@ -6,7 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_compile_options(-Wall -Wextra -Wpedantic)
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+endif()
+
+add_compile_options(-Wall -Wextra -Wpedantic -Werror=return-type)
 
 add_library(arm2r STATIC src/arm2r.cpp)
 target_include_directories(arm2r PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
