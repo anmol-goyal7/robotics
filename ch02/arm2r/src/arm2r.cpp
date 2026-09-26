@@ -2,8 +2,6 @@
 #include <cmath>
 
 namespace arm2r {
-// wrapToPi converts any angle ranging from - inf to inf in the range (- pi to
-// pi]
 double wrapToPi(double a) {
   double r = std::fmod(a, 2 * kPi);
   if (r < 0) {
