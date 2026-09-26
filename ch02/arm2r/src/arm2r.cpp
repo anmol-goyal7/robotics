@@ -13,4 +13,12 @@ double wrapToPi(double a) {
 
   return r;
 }
+
+double angDist(double a, double b) {
+  double dist = a - b;
+
+  dist = wrapToPi(dist);
+
+  return std::fabs(dist);
+}
 } // namespace arm2r
