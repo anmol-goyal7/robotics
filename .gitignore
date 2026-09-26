@@ -1,2 +1,4 @@
 .claude/
 dump/
+build/
+*.csv
