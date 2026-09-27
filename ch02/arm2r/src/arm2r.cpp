@@ -37,7 +37,7 @@ Vec2 fk2R(const Config2R &q, double L1, double L2) {
 
 std::vector<Vec2> sampleWorkspace(double L1, double L2, int n) {
   std::vector<Vec2> pts;
-  pts.reserve(n * n);
+  pts.reserve(static_cast<std::size_t>(n) * n);
 
   double step = 2 * kPi / n;
 
