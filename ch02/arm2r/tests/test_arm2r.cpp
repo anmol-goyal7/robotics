@@ -6,7 +6,9 @@
 using arm2r::angDist;
 using arm2r::Config2R;
 using arm2r::cspaceDist;
+using arm2r::fk2R;
 using arm2r::kPi;
+using arm2r::Vec2;
 using arm2r::wrapToPi;
 
 bool approxEq(double a, double b, double eps = 1e-9) {
@@ -36,8 +38,22 @@ int main() {
   assert(approxEq(cspaceDist(Config2R{0, 0}, Config2R{0, 0}), 0.0));
   assert(approxEq(cspaceDist(Config2R{0, 0}, Config2R{0.3, 0.4}), 0.5));
   assert(approxEq(cspaceDist(Config2R{0.3, 0.4}, Config2R{0, 0}), 0.5));
-  assert(approxEq(cspaceDist(Config2R{kPi - 0.01, 0}, Config2R{-kPi + 0.01, 0}), 0.02));
-  assert(approxEq(cspaceDist(Config2R{kPi - 0.01, kPi - 0.01}, Config2R{-kPi + 0.01, -kPi + 0.01}), 0.02 * std::sqrt(2.0)));
+  assert(approxEq(cspaceDist(Config2R{kPi - 0.01, 0}, Config2R{-kPi + 0.01, 0}),
+                  0.02));
+  assert(approxEq(cspaceDist(Config2R{kPi - 0.01, kPi - 0.01},
+                             Config2R{-kPi + 0.01, -kPi + 0.01}),
+                  0.02 * std::sqrt(2.0)));
+
+  // fk2R (L1 = 2, L2 = 1)
+  Vec2 p;
+  p = fk2R(Config2R{0, 0}, 2, 1); // straight along +x
+  assert(approxEq(p.x, 3) && approxEq(p.y, 0));
+  p = fk2R(Config2R{kPi / 2, 0}, 2, 1); // straight up: sin/cos swap
+  assert(approxEq(p.x, 0) && approxEq(p.y, 3));
+  p = fk2R(Config2R{0, kPi / 2}, 2, 1); // elbow 90: L1/L2 swap
+  assert(approxEq(p.x, 2) && approxEq(p.y, 1));
+  p = fk2R(Config2R{kPi / 2, kPi / 2}, 2, 1); // catches cos(th2) bug
+  assert(approxEq(p.x, -1) && approxEq(p.y, 2));
 
   std::puts("all tests passed");
   return 0;
