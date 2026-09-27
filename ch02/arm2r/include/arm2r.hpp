@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 namespace arm2r {
 constexpr double kPi = 3.14159265358979323846;
@@ -21,4 +22,6 @@ struct Vec2 {
 };
 
 Vec2 fk2R(const Config2R &q, double L1, double L2);
+
+std::vector<Vec2> sampleWorkspace(double L1, double L2, int n);
 } // namespace arm2r
