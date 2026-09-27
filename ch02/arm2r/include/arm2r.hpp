@@ -20,5 +20,5 @@ struct Vec2 {
   double x, y;
 };
 
-Vec2 fk2R(const Config2R &q, double L1, double L2); // namespace arm2r
+Vec2 fk2R(const Config2R &q, double L1, double L2);
 } // namespace arm2r
