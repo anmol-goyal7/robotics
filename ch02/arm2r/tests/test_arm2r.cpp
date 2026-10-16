@@ -1,3 +1,4 @@
+#undef NDEBUG  // tests must check in every build type
 #include "arm2r.hpp"
 #include <cassert>
 #include <cmath>
