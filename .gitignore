@@ -1,5 +1,4 @@
 .claude/
 dump/
 build/
-*.csv
 .venv/
